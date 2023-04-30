@@ -4,6 +4,7 @@ const cs = (el) => document.querySelectorAll(el);
 pizzaJson.map((item, index) => {
   let pizzaItem = c(".models .pizza-item").cloneNode(true);
 
+  pizzaItem.setAttribute('data-key', index);
   pizzaItem.querySelector(".pizza-item--img img").src = item.img;
   pizzaItem.querySelector(
     ".pizza-item--price"
@@ -12,6 +13,13 @@ pizzaJson.map((item, index) => {
   pizzaItem.querySelector(".pizza-item--desc").innerHTML = item.description;
   pizzaItem.querySelector(".pizza-item a").addEventListener("click", (e) => {
     e.preventDefault();
+    let key = e.target.closest('.pizza-item').getAttribute('data-key');
+
+    console.log(pizzaJson[key]);
+
+    c('.pizzaBig img').src = pizzaJson[key].img
+    c('.pizzaInfo h1').innerHTML = pizzaJson[key].name;
+    c('.pizzaInfo--desc').innerHTML = pizzaJson[key].description;
 
 
     c('.pizzaWindowArea').style.opacity = 0;
