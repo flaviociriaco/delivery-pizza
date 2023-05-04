@@ -26,16 +26,15 @@ pizzaJson.map((item, index) => {
     c(".pizzaInfo h1").innerHTML = pizzaJson[key].name;
     c(".pizzaInfo--desc").innerHTML = pizzaJson[key].description;
     c(".pizzaInfo--actualPrice").innerHTML = `R$ ${item.price.toFixed(2)}`;
-    c('.pizzaInfo--size.selected').classList.remove('selected');
+    c(".pizzaInfo--size.selected").classList.remove("selected");
     cs(".pizzaInfo--size").forEach((size, sizeIndex) => {
-      if(sizeIndex == 2) {
-        size.classList.add('selected');
+      if (sizeIndex == 2) {
+        size.classList.add("selected");
       }
       size.querySelector("span").innerHTML = pizzaJson[key].sizes[sizeIndex];
-
     });
 
-    c('.pizzaInfo--qt').innerHTML = modalQt;
+    c(".pizzaInfo--qt").innerHTML = modalQt;
 
     c(".pizzaWindowArea").style.opacity = 0;
     c(".pizzaWindowArea").style.display = "flex";
@@ -47,16 +46,26 @@ pizzaJson.map((item, index) => {
   c(".pizza-area").append(pizzaItem);
 });
 
-
 // Eventos do Modal
 function closeModal() {
   c(".pizzaWindowArea").style.opacity = 0;
   setTimeout(() => {
-    c(".pizzaWindowArea").style.display = 'none';
+    c(".pizzaWindowArea").style.display = "none";
   }, 500);
 }
 
-cs('.pizzaInfo--cancelButton, .pizzaInfo--cancelMobileButton').forEach((item)=>{
-  item.addEventListener('click', closeModal);
+cs(".pizzaInfo--cancelButton, .pizzaInfo--cancelMobileButton").forEach(
+  (item) => {
+    item.addEventListener("click", closeModal);
+  }
+);
+c(".pizzaInfo--qtmenos").addEventListener("click", () => {
+  if (modalQt > 1) {
+    modalQt--;
+    c(".pizzaInfo--qt").innerHTML = modalQt;
+  }
 });
-
+c(".pizzaInfo--qtmais").addEventListener("click", () => {
+  modalQt++;
+  c(".pizzaInfo--qt").innerHTML = modalQt;
+});
